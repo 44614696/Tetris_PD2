@@ -1,6 +1,6 @@
 package com.PD2.Tetris.App;
 
-public class scoreEstimate {
+public class ScoreEstimate {
     // 分數:一次消除0行,1行,2行,3行,4行獲得分數
     private int[] scoresPoolSpeed1 = {0, 100, 300, 600, 1000};
     private int[] scoresPoolSpeed2 = {0, 200, 500, 800, 1500};
