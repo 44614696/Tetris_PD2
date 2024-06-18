@@ -1,6 +1,6 @@
 package com.PD2.Tetris.App;
 
-public class ScoreEstimate {
+public class scoreEstimate {
     // 分數:一次消除0行,1行,2行,3行,4行獲得分數
     private int[] scoresPoolSpeed1 = {0, 100, 300, 600, 1000};
     private int[] scoresPoolSpeed2 = {0, 200, 500, 800, 1500};
@@ -56,68 +56,67 @@ public class ScoreEstimate {
                 if((totalScore < 500)){
                     totalScore += scoresPoolSpeed1[lines];
                     totalLine += lines;
-                    speed = 600-totalScore/6;
+                    speed = 600-totalScore/4;
                 }
-                else if((totalScore >= 500 && totalScore<2000)){
+                else if((totalScore >= 500 && totalScore < 2000)){
                     totalScore += scoresPoolSpeed2[lines];
                     totalLine += lines;
-                    speed = 550 - totalScore/8;
+                    speed = 550 - totalScore/6;
                 }
-                else if((totalScore >= 2000)){
+                else if((totalScore >= 2000 && totalScore < 2500)){
                     totalScore += scoresPoolSpeed3[lines];
                     totalLine += lines;
-                    speed = 550 - totalScore/10;
+                    speed = 550 - totalScore/8;
                     if(speed <= 250){
                         speed = 250;
                     }
                 }
-            }
-        }
-        else if(mode == 1){//扣分模式
-            if(totalScore > 0){
-                totalScore = totalScore - 2;
-            }
-            if (lines >= 0 && lines < scorePoolLength) {
-                if(totalScore > 0 && lines > 0){
-                    totalScore = totalScore + 2;
+                if(totalScore >= 2500){
+                    totalScore = totalScore - 2;
                 }
-
-                if((totalScore < 500)){
-                    totalScore += scoresPoolSpeed1[lines];
-                    totalLine += lines;
-                    speed = 600 - totalScore/6;
-                }
-                else if((totalScore >= 500 && totalScore < 1500)){
-                    totalScore += scoresPoolSpeed2[lines];
-                    totalLine += lines;
-                    speed = 500 - totalScore/8;
-                }
-                else if((totalScore >= 1500)){
-                    totalScore += scoresPoolSpeed3[lines];
-                    totalLine += lines;
-                    speed = 450-totalScore/10;
-                    if(speed<=200){
-                        speed = 200;
+                if (lines >= 0 && lines < scorePoolLength) {
+                    if(totalScore > 2500 && lines > 0){
+                        totalScore = totalScore + 2;
+                    }
+        
+                    if((totalScore >= 2500 && totalScore < 3500)){
+                        totalScore += scoresPoolSpeed1[lines];
+                        totalLine += lines;
+                        speed = 550 - totalScore/10;
+                    }
+                    else if((totalScore >= 2500 && totalScore < 3500)){
+                        totalScore += scoresPoolSpeed2[lines];
+                        totalLine += lines;
+                        speed = 550 - totalScore/10;
+                    }
+                    else if((totalScore >= 3500 && totalScore < 4500)){
+                        totalScore += scoresPoolSpeed3[lines];
+                        totalLine += lines;
+                        speed = 530 - totalScore/10;
+                        if(speed<=200){
+                            speed = 200;
+                        }
                     }
                 }
+                //隨機速度模式
+                speed = (int)(Math.random()*(500 - 300 + 1)) + 300;
+                if (lines >= 0 && lines < scorePoolLength) {
+                    if((speed >= 4500 && totalScore < 5500)){
+                        totalScore += scoresPoolSpeed1[lines];
+                        totalLine += lines;
+                    }
+                    else if(speed >= 5500 && speed < 6500){
+                        totalScore += scoresPoolSpeed2[lines];
+                        totalLine += lines;
+                    }
+                    else if(speed >= 6500){
+                        totalScore += scoresPoolSpeed3[lines];
+                        totalLine += lines;
+                    }
+                }
+
             }
         }
-        else if(mode==2){//隨機速度模式
-            speed = (int)(Math.random()*(500 - 200 + 1)) + 200;
-            if (lines >= 0 && lines < scorePoolLength) {
-                if((speed >= 300)){
-                    totalScore += scoresPoolSpeed1[lines];
-                    totalLine += lines;
-                }
-                else if(speed >= 250 && speed < 300){
-                    totalScore += scoresPoolSpeed2[lines];
-                    totalLine += lines;
-                }
-                else if(speed < 250){
-                    totalScore += scoresPoolSpeed3[lines];
-                    totalLine += lines;
-                }
-            }
-        }
+       
     }
 }
